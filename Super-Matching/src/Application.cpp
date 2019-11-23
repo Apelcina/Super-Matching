@@ -9,7 +9,7 @@
 #include "m1-iterative.h"
 
 /* SET_SIZE represents size of our data set */
-#define SET_SIZE 10000
+#define SET_SIZE 1000000
 
 /* 
 	What is the fastest way to find matching numbers in two unsorted arrays?
@@ -45,6 +45,7 @@ int main()
 	double time_taken_1, time_taken_2, time_taken_3, time_taken_4;
 
 	size_t size = SET_SIZE;
+	int count1, count2, count3, count4;
 
 	// Creating two arrays
 	unsigned int* arr1 = new unsigned int[size];
@@ -69,7 +70,7 @@ int main()
 
 	std::cout << "Starting Iterative test." << std::endl;
 	time1 = clock();
-	testIterative(arr1, arr2, size);
+	count1 = testIterative(arr1, arr2, size);
 	time1 = clock() - time1;
 	time_taken_1 = ((double)time1) / CLOCKS_PER_SEC;
 	std::cout << std::endl;
