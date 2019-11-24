@@ -27,6 +27,10 @@ project "Super-Matching"
         staticruntime "On"
         systemversion "10.0.17763.0"
 
+    filter "system:linux"
+        cppdialect "C++17"
+        staticruntime "On"
+
     filter "configurations:Debug"
         defines "DEBUG"
         optimize "On"

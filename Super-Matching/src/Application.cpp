@@ -6,10 +6,10 @@
 #include <chrono>
 #include <cstring>
 
-#include "m1-iterative.h"
+#include "test_funcs.h"
 
 /* SET_SIZE represents size of our data set */
-#define SET_SIZE 1000000
+#define SET_SIZE 100000
 
 /* 
 	What is the fastest way to find matching numbers in two unsorted arrays?
@@ -26,7 +26,7 @@
 	- debug vs release will yield different results so both should be analysed
 */
 
-void FillArray(unsigned int* array, unsigned int size)
+void FillArray(int* array, int size)
 {
 	/* Random number generator */
 	srand(time(0));
@@ -48,8 +48,8 @@ int main()
 	int count1, count2, count3, count4;
 
 	// Creating two arrays
-	unsigned int* arr1 = new unsigned int[size];
-	unsigned int* arr2 = new unsigned int[size];
+	int* arr1 = new int[size];
+	int* arr2 = new int[size];
 
 	std::cout << std::endl;
 	std::cout << "Creating Array 1" << std::endl;
@@ -60,21 +60,33 @@ int main()
 	std::cout << std::endl;
 
 
-	unsigned int* temp_arr1 = new unsigned int[size];
-	unsigned int* temp_arr2 = new unsigned int[size];
+	int* temp_arr1 = new int[size];
+	int* temp_arr2 = new int[size];
 
 
-	/* Method 1: Iterate through both arrays */
+	//~ /* Method 1: Iterate through both arrays. O(N^2) */
+	//~ std::memcpy(temp_arr1, arr1, size * sizeof(int));
+	//~ std::memcpy(temp_arr2, arr2, size * sizeof(int));
+
+	//~ std::cout << "Starting Iterative test." << std::endl;
+	//~ time1 = clock();
+	//~ testIterative(arr1, arr2, size);
+	//~ time1 = clock() - time1;
+	//~ time_taken_1 = ((double)time1) / CLOCKS_PER_SEC;
+	//~ std::cout << std::endl;
+
+	/* Method 2: quick sort one array and binary search it. O(N log N)  */
 	std::memcpy(temp_arr1, arr1, size * sizeof(int));
 	std::memcpy(temp_arr2, arr2, size * sizeof(int));
-
-	std::cout << "Starting Iterative test." << std::endl;
-	time1 = clock();
-	count1 = testIterative(arr1, arr2, size);
-	time1 = clock() - time1;
-	time_taken_1 = ((double)time1) / CLOCKS_PER_SEC;
+	
+	std::cout << "Starting quicksort and binary search test." << std::endl;
+	time2 = clock();
+	testBinarySearch(temp_arr1, temp_arr2, size);
+	time2 = clock() - time2;
+	time_taken_2 = ((double)time2) / CLOCKS_PER_SEC;
 	std::cout << std::endl;
-
+	
+	
 	std::cin.get();
 
 	return 0;
