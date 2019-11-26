@@ -42,11 +42,14 @@ void binarySearch(int* arr, int size, int target)
 	int high = size - 1;
 	int mid;
 	
-	while(low < high)
+	while(low <= high)
 	{
 		mid = (low + high) / 2;
-		if(arr[mid] == target)
+		if (arr[mid] == target)
+		{
 			std::cout << "Quicksort binary search found " << arr[mid] << " in both arrays." << std::endl;
+			break;
+		}
 		else if(arr[mid] <= target)
 			low = mid + 1;
 		else

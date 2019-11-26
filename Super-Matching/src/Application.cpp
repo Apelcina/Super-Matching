@@ -29,12 +29,12 @@
 void FillArray(int* array, int size)
 {
 	/* Random number generator */
-	srand(time(0));
+	srand((unsigned int)time(0));
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<unsigned long long> dis(0, 1000000000);
 	
-	for (size_t i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 		array[i] = dis(gen);
 }
 
@@ -44,7 +44,7 @@ int main()
 	clock_t time1, time2, time3, time4;
 	double time_taken_1, time_taken_2, time_taken_3, time_taken_4;
 
-	size_t size = SET_SIZE;
+	int size = SET_SIZE;
 	int count1, count2, count3, count4;
 
 	// Creating two arrays
@@ -64,16 +64,16 @@ int main()
 	int* temp_arr2 = new int[size];
 
 
-	//~ /* Method 1: Iterate through both arrays. O(N^2) */
-	//~ std::memcpy(temp_arr1, arr1, size * sizeof(int));
-	//~ std::memcpy(temp_arr2, arr2, size * sizeof(int));
+	/* Method 1: Iterate through both arrays. O(N^2) */
+	std::memcpy(temp_arr1, arr1, size * sizeof(int));
+	std::memcpy(temp_arr2, arr2, size * sizeof(int));
 
-	//~ std::cout << "Starting Iterative test." << std::endl;
-	//~ time1 = clock();
-	//~ testIterative(arr1, arr2, size);
-	//~ time1 = clock() - time1;
-	//~ time_taken_1 = ((double)time1) / CLOCKS_PER_SEC;
-	//~ std::cout << std::endl;
+	std::cout << "Starting Iterative test." << std::endl;
+	time1 = clock();
+	testIterative(arr1, arr2, size);
+	time1 = clock() - time1;
+	time_taken_1 = ((double)time1) / CLOCKS_PER_SEC;
+	std::cout << std::endl;
 
 	/* Method 2: quick sort one array and binary search it. O(N log N)  */
 	std::memcpy(temp_arr1, arr1, size * sizeof(int));
